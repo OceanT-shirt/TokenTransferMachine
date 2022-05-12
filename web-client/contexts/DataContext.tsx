@@ -1,6 +1,7 @@
 declare let window: any;
 import {createContext, useContext, useState} from "react";
 import Web3 from "web3";
+import Token from "../abis/Token.json";
 
 
 interface DataContextProps {
@@ -43,11 +44,12 @@ export const useProviderData = () => {
             setAccount(allAccounts[0]);
             console.log("current account:", account);
 
-            const paymentTokenData = PaymentToken.networks["80001"];
+            // const paymentTokenData = PaymentToken.networks["80001"];
+            const paymentTokenData = "I don't use this constant";
             if (paymentTokenData) {
                 var paymentTokenInstance = new web3.eth.Contract(
-                    PaymentToken.abi, // payment contract interface
-                    paymentTokenData.address // called payment contract data
+                    Token, // payment contract interface
+                    "0x8A41f67ef9332f58c93280D57870fD4E52826Da7" // called payment contract data
                 );
                 setPaymentToken(paymentTokenInstance);
                 var bal = await paymentTokenInstance.methods
